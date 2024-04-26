@@ -2,6 +2,8 @@ version: "3.1"
 
 intents:
   - document_after_education
+  - how_to_get_document_after_education
+  - documents_diploma
   - greet
   - goodbye
   - affirm
