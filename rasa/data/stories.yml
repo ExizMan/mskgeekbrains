@@ -17,6 +17,11 @@ stories:
     - intent: documents_diploma
     - action: utter_documents_diploma
 
+- story: расскажи о том как мне получить удостоверение
+  steps:
+    - intent: get_id_card
+    - action: utter_get_id_card
+
 - story: happy path
   steps:
   - intent: greet
