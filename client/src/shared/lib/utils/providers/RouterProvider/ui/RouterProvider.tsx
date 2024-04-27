@@ -1,6 +1,6 @@
 import cls from './RouterProvider.module.scss';
 import { createBrowserRouter, redirect } from 'react-router-dom';
-import { LoginPage, MainPage, RegisterPage } from '@pages/ui';
+import { LoginPage, ChatPage, MyPage, RegisterPage } from '@pages/ui';
 import { ReactNode } from 'react';
 import { Navbar, Toolbar } from '@widgets/ui';
 
@@ -19,7 +19,20 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Provider><MainPage /></Provider>,
+                element: <Provider><ChatPage /></Provider>,
+            },
+
+            {
+                path: 'user',
+                children: [
+                    {
+                        index: true,
+                        element: <>
+                            <Navbar />
+                            <MyPage />
+                        </>,
+                    },
+                ],
             },
             {
                 path: 'auth',
