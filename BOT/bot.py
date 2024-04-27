@@ -72,14 +72,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     # Например, можно использовать библиотеку requests для отправки POST-запроса на ваш API
     # 
     api_url = "http://192.168.1.206:8000/bot/api/student/"
-    payload = {'usertg_id': user_tg_id, 'chat_id': chat_id}
-    response = requests.post(api_url, json=payload)
-
+    payload = {'usertg_id': user_tg_id} #, 'chat_id': chat_id
+    response = requests.post(api_url, json={'usertg_id': user_tg_id})
+    print({'usertg_id': user_tg_id})
     # Проверяем успешность запроса и обрабатываем ответ
     if response.status_code == 200:
         print("User data sent successfully to the API.")
     else:
-        print("Failed to send user data to the API.")
+        print(f"Failed to send user data to the API.{response.status_code}")
 
     # Возвращаем следующее состояние для обработчика диалога
     return TEXT_INPUT
