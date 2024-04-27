@@ -1,0 +1,13 @@
+.navbar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.avatar {
+  background-color: var(--bg-dark);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

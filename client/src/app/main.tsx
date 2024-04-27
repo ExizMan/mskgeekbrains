@@ -6,7 +6,7 @@ import {router, store} from "@shared/lib";
 import ThemeProvider from "@shared/lib/utils/providers/ThemeProvider/ui/ThemeProvider.tsx";
 import {App} from "@app/App.tsx";
 import {Provider} from "react-redux";
-
+import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
         <ThemeProvider>
