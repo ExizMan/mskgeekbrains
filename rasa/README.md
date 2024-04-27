@@ -1,5 +1,25 @@
 # ML Instance
 
+## Deploy using Docker-Compose
+
+## Deploy in local
+
+- Python 3.9.19
+
+```bash
+pip install rasa
+```
+
+```bash
+rasa train
+```
+
+Will be Run on API `localhost:5005`
+
+```bash
+rasa run --enable-api --cors "*"
+```
+
 ## Dirs
 
 `data` - Содержит файлы для обучения модели
@@ -177,10 +197,3 @@ forms:
 
 1. В файле `endpoints.yml` указываем
 
-## Deploy
-
-Run with API `localhost:5005`
-
-```bash
-rasa run --enable-api --cors "*"
-```
