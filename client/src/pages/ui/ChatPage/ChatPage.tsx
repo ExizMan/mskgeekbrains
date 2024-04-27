@@ -1,23 +1,31 @@
 import cls from './ChatPage.module.scss';
-import Chat from '@assets/icons/comments.svg';
-import { Text } from '@shared/ui';
-import { ColorEnum, SizeEnum, WeightEnum } from '@shared/lib';
+import { useParams } from 'react-router-dom';
+import { IMessageCloudProps, MessageCloud, useGetMessages } from '@entities/message';
+import { useEffect } from 'react';
+import { Loading } from '@shared/ui';
+import { ChatInput } from '@entities/chat';
 
 export const ChatPage = () => {
-    return (
-        <div className={cls.wrapper}>
-            <div className={cls.chat}>
-                <Chat className={cls.icon}/>
-                <Text.Heading
-                    size={SizeEnum.H3}
-                    color={ColorEnum.BLACK}
-                    weight={WeightEnum.BOLD}
-                    className={cls.title}
-                >
-                    Выберите чат
-                </Text.Heading>
+    const { id } = useParams();
+    const { trigger, messages } = useGetMessages();
+    useEffect(() => {
+        if (id) {
+            trigger(+id);
+        }
+    }, [id]);
+    if (messages) {
+        return (
+            <div className={cls.wrapper}>
+                <div className={cls.messages}>
+                    {messages.map((item: IMessageCloudProps) => (
+                        <MessageCloud key={item.id} {...item} />
+                    ))}
+                </div>
+                <ChatInput chat_id={id} usertg_id={messages[0]?.usertg_id} />
             </div>
-        </div>
-    );
+        );
+    } else {
+        return <Loading />;
+    }
 };
 

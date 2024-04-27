@@ -37,5 +37,5 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const mainApi = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: (_) => ({}),
-    tagTypes: ["User"]
+    tagTypes: ["User", "Messages"]
 })

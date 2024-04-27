@@ -1,7 +1,7 @@
 import cls from './UserChangeForm.module.scss';
 import { Button, Input, Text } from '@shared/ui';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { BorderEnum, ColorEnum, SizeEnum } from '@shared/lib';
+import { ChangeEvent, useState, useEffect } from 'react';
+import { BorderEnum, classNames, ColorEnum, SizeEnum } from '@shared/lib';
 import { toast } from 'react-toastify';
 import { useGetMe } from '@entities/user/lib/hooks';
 import { IUser } from '@entities/user';
@@ -18,11 +18,6 @@ export const UserChangeForm = ({ disabled }: { disabled: boolean }) => {
         password: '',
         repeatPassword: '',
     });
-    if (!user) {
-        return (
-            <div>loading...</div>
-        );
-    }
     const handleChange = (key: string, value: string) => {
         setData(prevState => ({
             ...prevState,
@@ -30,19 +25,19 @@ export const UserChangeForm = ({ disabled }: { disabled: boolean }) => {
         }));
     };
 
-    // useEffect(() => {
-    //     if (user) {
-    //         setData({
-    //             email: user?.email,
-    //             firstName: user?.firstName,
-    //             lastName: user?.lastName,
-    //             avatar: user?.avatar,
-    //             username: user?.username,
-    //             password: '',
-    //             repeatPassword: '',
-    //         })
-    //     }
-    // }, [user]);
+    useEffect(() => {
+        if (user) {
+            setData({
+                email: user?.email,
+                firstName: user?.firstName,
+                lastName: user?.lastName,
+                avatar: user?.avatar,
+                username: user?.username,
+                password: '',
+                repeatPassword: '',
+            });
+        }
+    }, [user]);
     const handleReset = () => {
         setData({
             email: user.email,
@@ -70,10 +65,17 @@ export const UserChangeForm = ({ disabled }: { disabled: boolean }) => {
             }
         }
     };
+    if (!user) {
+        return (
+            <div>loading...</div>
+        );
+    }
     return (
         <form className={cls.form}>
             <div className={cls.mainInfo}>
-                <div className={cls.avatar}>
+                <div className={classNames(cls.avatar, {
+                    [cls.active]: !disabled,
+                }, [])}>
                     {user.avatar ? (
                         <img
                             src={`
@@ -84,9 +86,9 @@ export const UserChangeForm = ({ disabled }: { disabled: boolean }) => {
                         <Text.Heading size={SizeEnum.H2}
                                       color={ColorEnum.BLACK}>  {user.username && user.username[0].toUpperCase()}</Text.Heading>
                     )}
-                    <input
+                    {!disabled && <input
                         onChange={handleFileChange}
-                        className={cls.avatarFile} type="file" />
+                        className={cls.avatarFile} type="file" />}
                 </div>
                 <div className={cls.info}>
                     <Text.Heading size={SizeEnum.H5} color={ColorEnum.BLACK}>Основная информация</Text.Heading>

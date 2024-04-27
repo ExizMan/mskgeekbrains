@@ -1,46 +1,21 @@
 import cls from './Toolbar.module.scss';
-import { Text } from '@shared/ui';
-import { ColorEnum, SizeEnum } from '@shared/lib';
+import { IChat, ChatCard, useGetChats } from '@entities/chat';
+import { Loading } from '@shared/ui';
 
 export const Toolbar = () => {
-    const list = [
-        {
-            link: '/',
-            text: 'Главная',
-        },
-        {
-            link: '/',
-            text: 'Главная',
-        },
-        {
-            link: '/',
-            text: 'Главная',
-        },
-        {
-            link: '/',
-            text: 'Главная',
-        },
-        {
-            link: '/',
-            text: 'Главная',
-        },
-        {
-            link: '/',
-            text: 'Главная',
-        },
-    ];
-    return (
-        <div className={cls.toolbar}>
-            <ul className={cls.list}>
-                {list.map((item) => (
-                    <li key={item.text} className={cls.listItem}>
-                        <Text.Link className={cls.link} to={'/user'} size={SizeEnum.H3} color={ColorEnum.BLACK}>
-                            124
-                        </Text.Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    const { chats } = useGetChats();
+    if (chats) {
+        return (
+            <div className={cls.toolbar}>
+                <ul className={cls.list}>
+                    {chats.map((item: IChat) => (
+                        <ChatCard key={item.id} {...item} />
+                    ))}
+                </ul>
+            </div>
+        );
+    } else {
+        return <Loading />;
+    }
 };
 
