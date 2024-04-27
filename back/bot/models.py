@@ -31,7 +31,6 @@ class Chat(models.Model):
 
 class Student(models.Model):
     firstname = models.TextField(blank=True, null=True)
-    lastname = models.TextField(blank=True, null=True)
     username = models.TextField(blank=True, null=True)
     usertg_id = models.IntegerField(primary_key=True)
 
