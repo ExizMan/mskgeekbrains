@@ -11,3 +11,8 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Say 'Куратор скоро ответит на ваше сообщение' anytime the user call_curator
+  steps:
+    - intent: call_curator
+    - action: utter_call_curator
