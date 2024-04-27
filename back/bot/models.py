@@ -34,5 +34,10 @@ class Student(models.Model):
     username = models.TextField(blank=True, null=True)
     usertg_id = models.IntegerField(primary_key=True)
 
-
+class Review(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    observer = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    on_message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    rate = models.IntegerField()
+    description = models.TextField()
 # Create your models here.
