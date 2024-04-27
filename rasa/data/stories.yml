@@ -1,0 +1,50 @@
+version: "3.1"
+
+stories:
+
+- story: расскажи о документах после обучения
+  steps:
+    - intent: document_after_education
+    - action: utter_document_after_education
+
+- story: расскажи о том как мне получить документы после обучения
+  steps:
+    - intent: how_to_get_document_after_education
+    - action: utter_how_to_get_document_after_education
+
+- story: расскажи о том как мне получить диплом
+  steps:
+    - intent: documents_diploma
+    - action: utter_documents_diploma
+
+- story: расскажи о том как мне получить удостоверение
+  steps:
+    - intent: get_id_card
+    - action: utter_get_id_card
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
