@@ -1,8 +1,10 @@
+import uuid
+
 from django.db import models
 
 
 class Message(models.Model):
-    id = models.UUIDField(primary_key=True)
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     usertg_id = models.ForeignKey('Student', on_delete=models.CASCADE)
     chat_id = models.ForeignKey('bot.Chat', on_delete=models.CASCADE)
     text = models.TextField()
@@ -28,9 +30,9 @@ class Chat(models.Model):
 
 
 class Student(models.Model):
-    firstname = models.TextField()
-    lastname = models.TextField()
-    username = models.TextField()
+    firstname = models.TextField(blank=True, null=True)
+    lastname = models.TextField(blank=True, null=True)
+    username = models.TextField(blank=True, null=True)
     usertg_id = models.IntegerField(primary_key=True)
 
 
