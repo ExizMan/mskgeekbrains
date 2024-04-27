@@ -36,9 +36,9 @@ class ChatViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
 
-        #response.data["last_message"] = Message.objects.filter(chat_id=response.data["id"]).last()
+        result = [resp for resp in response.data if resp['last_massage'] is not None]
 
-        return Response(response.data)
+        return Response(result)
 
 
 class MessageViewSet(ModelViewSet):
@@ -48,7 +48,7 @@ class MessageViewSet(ModelViewSet):
     @action(detail=True, methods=['get'])
     def get_by_chat(self, request, pk):
 
-        messages = Message.objects.filter(chat_id=pk).order_by('-date').values('id','text', 'date', 'answer_by')
+        messages = Message.objects.filter(chat_id=pk).order_by('date').values('id','text', 'date', 'answer_by','usertg_id')
 
         return Response(messages, status=HTTP_200_OK)
 
