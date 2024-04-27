@@ -12,6 +12,11 @@ stories:
     - intent: how_to_get_document_after_education
     - action: utter_how_to_get_document_after_education
 
+- story: расскажи о том как мне получить диплом
+  steps:
+    - intent: documents_diploma
+    - action: utter_documents_diploma
+
 - story: happy path
   steps:
   - intent: greet
