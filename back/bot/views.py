@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.status import *
+import requests
 
 from .models import *
 from .serializers import *
@@ -47,35 +48,32 @@ class MessageViewSet(ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def get_by_chat(self, request, pk):
-
         messages = Message.objects.filter(chat_id=pk).order_by('date').values('id','text', 'date', 'answer_by','usertg_id')
-
         return Response(messages, status=HTTP_200_OK)
+
 
 
 
 
     @action(detail=False, methods=['post'])
     def receive(self, request):
-        data = request.data['message']
-
+        data = request.data
         serializer = self.serializer_class(data=data)
-
         if serializer.is_valid():
             serializer.save()
+            message = serializer.data['text']
+            try:
+                response = requests.post('http://localhost:5005/webhooks/rest/webhook', json={'message': message})
+                if response.status_code == 200 and response.json():
+                    answer = response.json()['text']
+                    serializer.data['text'] = answer
+                    serializer.data['is_rasa_can_solve'] = True
+                else:
+                    serializer.data['is_rasa_can_solve'] = False
+                serializer.data['is_processed_rasa'] = True
+                serializer.save()
+            except Exception as e:
+                return Response(e, status=HTTP_400_BAD_REQUEST)
             return Response(serializer.data, status=HTTP_201_CREATED)
-            """отправляем в расу, принимаем ответ"""
-            # answer = send_to_rasa(serializer.data)
-            # if answer.is_rasa_can_solve is True:
-            #     serializer.data['answer'] = answer.answer
-            #     serializer.data['answer_by'] = answer.answer_by
-            #     serializer.data['is_rasa_can_solve'] = answer.is_rasa_can_solve
-            # else:
-            #     serializer.data['is_rasa_can_solve'] = answer.is_rasa_can_solve
-            #     иначе отправляем в генеративную модель
-            #     send_to_gpt(serializer.data)
-            # serializer.data['is_processed_rasa'] = True
-            # serializer.save()
-
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-# Create your views here.
+            
