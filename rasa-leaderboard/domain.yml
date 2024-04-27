@@ -1,0 +1,129 @@
+version: "3.1"
+
+intents:
+  - document_after_education
+  - how_to_get_document_after_education
+  - documents_diploma
+  - get_id_card
+  - how_to_get_diploma
+  - documents_tax_deduction
+  - documents_tax_deduction_fix
+  - where_is_lessons
+  - lessons_organization_cource_planing
+  - lessons_organization_education_formats
+  - lessons_organization_geekbrains_formats
+  - lessons_organization_video_recording
+  - evaluation_resolve_test
+  - practical_work
+  - study_program
+  - group_entry
+  - portal_how_to_start_study
+  - portal_study_components
+  - portal_separate_tab_cources
+  - portal_disable_notifications
+  - portal_about_me
+  - education_program_how_it_works
+  - education_program_prof_vs_cvalification
+  - events_2024
+  - events_lesson
+  - system_requirements
+  - system_requirements_software
+  - head_hanter_found_help
+  - head_hanter_how_to_get_found_help
+  - head_hanter_found_help_includes
+
+responses:
+
+  utter_document_after_education:
+    - text: "0"
+
+  utter_how_to_get_document_after_education:
+    - text: "1"
+
+  utter_documents_diploma:
+    - text: "2"
+
+  utter_get_id_card:
+    - text: "3"
+
+  utter_how_to_get_diploma:
+    - text: "4"
+
+  utter_documents_tax_deduction:
+    - text: "28"
+
+  utter_documents_tax_deduction_fix:
+    - text: "29"
+
+  utter_where_is_lessons:
+    - text: "5"
+
+  utter_lessons_organization_cource_planing:
+    - text: "6"
+
+  utter_lessons_organization_education_formats:
+    - text: "7"
+
+  utter_lessons_organization_geekbrains_formats:
+    - text: "8"
+
+  utter_lessons_organization_video_recording:
+    - text: "9"
+
+  utter_evaluation_resolve_test:
+    - text: "10"
+
+  utter_group_entry:
+    - text: "11"
+
+  utter_practical_work:
+    - text: "12"
+
+  utter_study_program:
+    - text: "13"
+
+  utter_portal_how_to_start_study:
+    - text: "14"
+
+  utter_portal_study_components:
+    - text: "15"
+
+  utter_portal_separate_tab_cources:
+    - text: "16"
+
+  utter_portal_disable_notifications:
+    - text: "17"
+
+  utter_portal_about_me:
+    - text: "18"
+
+  utter_education_program_how_it_works:
+    - text: "19"
+
+  utter_education_program_prof_vs_cvalification:
+    - text: "20"
+
+  utter_events_2024:
+    - text: "21"
+
+  utter_events_lesson:
+    - text: "22"
+
+  utter_system_requirements:
+    - text: "23"
+
+  utter_system_requirements_software:
+    - text: "24"
+
+  utter_head_hanter_found_help:
+    - text: "25"
+
+  utter_head_hanter_how_to_get_found_help:
+    - text: "26"
+
+  utter_head_hanter_found_help_includes:
+    - text: "27"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

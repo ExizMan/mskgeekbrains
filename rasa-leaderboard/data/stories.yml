@@ -1,0 +1,153 @@
+version: "3.1"
+
+stories:
+
+- story: расскажи о документах после обучения
+  steps:
+    - intent: document_after_education
+    - action: utter_document_after_education
+
+- story: расскажи о том как мне получить документы после обучения
+  steps:
+    - intent: how_to_get_document_after_education
+    - action: utter_how_to_get_document_after_education
+
+- story: расскажи о том как мне получить диплом
+  steps:
+    - intent: documents_diploma
+    - action: utter_documents_diploma
+
+- story: расскажи о том как мне получить удостоверение
+  steps:
+    - intent: get_id_card
+    - action: utter_get_id_card
+
+- story: расскажи о том как мне получить диплом
+  steps:
+    - intent: how_to_get_diploma
+    - action: utter_how_to_get_diploma
+
+- story: расскажи о том как мне получить налоговый вычет
+  steps:
+    - intent: documents_tax_deduction
+    - action: utter_documents_tax_deduction
+
+- story: что делать если налоговая отказывается принимать договор
+  steps:
+    - intent: documents_tax_deduction_fix
+    - action: utter_documents_tax_deduction_fix
+
+- story: расскажи о том где обычно проходят уроки
+  steps:
+    - intent: where_is_lessons
+    - action: utter_where_is_lessons
+
+- story: расскажи о расписании курса
+  steps:
+    - intent: lessons_organization_cource_planing
+    - action: utter_lessons_organization_cource_planing
+
+- story: расскажи о заданиях на курсе
+  steps:
+    - intent: lessons_organization_education_formats
+    - action: utter_lessons_organization_education_formats
+
+- story: расскажи о форматах обучения в GeekBrains
+  steps:
+    - intent: lessons_organization_geekbrains_formats
+    - action: utter_lessons_organization_geekbrains_formats
+
+- story: расскажи о том когда появится запись вибинаров
+  steps:
+    - intent: lessons_organization_video_recording
+    - action: utter_lessons_organization_video_recording
+
+- story: расскажи о том как пересдать работу
+  steps:
+    - intent: evaluation_resolve_test
+    - action: utter_evaluation_resolve_test
+
+- story: расскажи о переводах между группами
+  steps:
+    - intent: group_entry
+    - action: utter_group_entry
+
+- story: расскажи о практических работах
+  steps:
+    - intent: practical_work
+    - action: utter_practical_work
+
+- story: расскажи о програме обучения
+  steps:
+    - intent: study_program
+    - action: utter_study_program
+
+- story: расскажи о том как мне начать учиться
+  steps:
+    - intent: portal_how_to_start_study
+    - action: utter_portal_how_to_start_study
+
+- story: расскажи о том что входит в обучение
+  steps:
+    - intent: portal_study_components
+    - action: utter_portal_study_components
+
+- story: расскажи о курсах в вкладке Отдельные
+  steps:
+    - intent: portal_separate_tab_cources
+    - action: utter_portal_separate_tab_cources
+
+- story: расскажи о том как выключить уведомления
+  steps:
+    - intent: portal_disable_notifications
+    - action: utter_portal_disable_notifications
+
+- story: расскажи о том как отредактировать свой профиль
+  steps:
+    - intent: portal_about_me
+    - action: utter_portal_about_me
+
+- story: расскажи о том как устроена програма обучения
+  steps:
+    - intent: education_program_how_it_works
+    - action: utter_education_program_how_it_works
+
+- story: расскажи о разнице между профессиональной подготовкой и программой повышения квалификации
+  steps:
+    - intent: education_program_prof_vs_cvalification
+    - action: utter_education_program_prof_vs_cvalification
+
+- story: расскажи о расписании каникул в 2024 году
+  steps:
+    - intent: events_2024
+    - action: utter_events_2024
+
+- story: расскажи о том где посмотреть расписание уроков
+  steps:
+    - intent: events_lesson
+    - action: utter_events_lesson
+
+- story: расскажи про системные требования компьютера для обучения
+  steps:
+    - intent: system_requirements
+    - action: utter_system_requirements
+
+- story: расскажи про программное обеспечение которое понадобится для специальности "Тестировщик"
+  steps:
+    - intent: system_requirements_software
+    - action: utter_system_requirements_software
+
+- story: расскажи про помощь при трудоустройстве
+  steps:
+    - intent: head_hanter_found_help
+    - action: utter_head_hanter_found_help
+
+- story: расскажи про как получить помощь при трудоустройстве
+  steps:
+    - intent: head_hanter_how_to_get_found_help
+    - action: utter_head_hanter_how_to_get_found_help
+
+- story: расскажи что входит в помощь при трудоустройстве
+  steps:
+    - intent: head_hanter_found_help_includes
+    - action: utter_head_hanter_found_help_includes

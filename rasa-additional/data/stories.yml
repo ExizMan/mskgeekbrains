@@ -159,22 +159,16 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
-- story: sad path 1
+- story: расскажи о документах
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+    - intent: document_after_education
+    - action: utter_document_after_education
+    - intent: how_to_get_document_after_education
+    - action: utter_how_to_get_document_after_education
 
-- story: sad path 2
+- story: расскажи о дипломе и документах
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+    - intent: document_after_education
+    - action: utter_document_after_education
+    - intent: documents_diploma
+    - action: utter_documents_diploma
