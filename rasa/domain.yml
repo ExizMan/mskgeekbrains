@@ -14,20 +14,20 @@ responses:
   - text: "Привет, как я могу тебе помочь??"
 
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
+  - text: "Это должно тебе помочь:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
 
   utter_did_that_help:
-  - text: "Did that help you?"
+  - text: "Это помогло тебе?"
 
   utter_happy:
-  - text: "Great, carry on!"
+  - text: "Отлично!"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Пока"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "Я ваш курратор на службе GeekBrains"
 
 session_config:
   session_expiration_time: 60
