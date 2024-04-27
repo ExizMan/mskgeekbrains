@@ -7,6 +7,11 @@ stories:
     - intent: document_after_education
     - action: utter_document_after_education
 
+- story: расскажи о том как мне получить документы после обучения
+  steps:
+    - intent: how_to_get_document_after_education
+    - action: utter_how_to_get_document_after_education
+
 - story: happy path
   steps:
   - intent: greet
