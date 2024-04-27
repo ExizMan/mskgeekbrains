@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@shared/lib';
 
 export const useGetMe = () => {
-    const { data, isLoading } = useGetMeQuery();
+    const { data, isLoading } = useGetMeQuery(null);
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {

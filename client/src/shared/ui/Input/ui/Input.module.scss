@@ -18,6 +18,16 @@
     outline: none;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(99%);
+  }
+
+  &:disabled + .label,
+  &:not([value=""]) + .label {
+    filter: brightness(99%);
+  }
+
   & + .label {
     opacity: 0.5;
   }

@@ -31,7 +31,7 @@ export const Input = (
 
 
     return (
-        <div className={cls.wrapper}>
+        <div className={classNames(cls.wrapper, {}, [className])}>
             <input
                 type={type}
                 value={inputValue}
@@ -59,7 +59,7 @@ export const Input = (
                     [cls.borderH4]: border === BorderEnum.H4,
                     [cls.borderH5]: border === BorderEnum.H5,
                     [cls.borderH6]: border === BorderEnum.H6,
-                }, [className])}
+                }, [])}
                 {...props}
             />
             <Paragraph

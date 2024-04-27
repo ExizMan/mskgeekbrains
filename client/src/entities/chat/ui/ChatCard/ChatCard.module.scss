@@ -1,0 +1,30 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  background-color: var(--bg);
+  padding: 10px 15px;
+  border-radius: var(--border-radius-5);
+  cursor: pointer;
+  transition: 0.3s all ease;
+  align-items: center;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &.active {
+    filter: brightness(85%);
+  }
+
+  & .avatar {
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    background-color: var(--bg-dark);
+  }
+
+  & .lastMessage {
+    opacity: 0.5;
+  }
+}

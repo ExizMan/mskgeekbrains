@@ -86,4 +86,5 @@ class OneTimePassword(models.Model):
     email = models.EmailField(max_length=255, blank=True, null=True)
     otp = models.CharField(max_length=6)
 
+
 # Create your models here.

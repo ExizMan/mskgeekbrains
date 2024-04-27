@@ -1,0 +1,13 @@
+.wrapper {
+  height: calc(100vh - var(--navbar-height));
+}
+.list {
+  height: 100%;
+  &Item {
+    padding: 20px 40px;
+    margin: 0 auto;
+  }
+}
+
+.char {
+}

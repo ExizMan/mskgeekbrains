@@ -1,0 +1,27 @@
+.loading {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100000000;
+  background-color: var(--bg);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  & svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  & circle {
+    position: relative;
+    z-index: 1000000000;
+    stroke: var(--primary);
+    fill: var(--primary);
+  }
+}
