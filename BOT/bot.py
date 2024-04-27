@@ -5,8 +5,8 @@ import logging
 from aiohttp import ClientSession
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ConversationHandler, ContextTypes
-persistence = PicklePersistence(filepath='my_bot_persistence')
-
+persistence = PicklePersistence(filepath='my_bot_persistence',)
+import requests
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Extract text from the incoming Telegram message
     text = update.message.text
@@ -14,15 +14,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "text": update.message.text,  # Текст сообщения
         "date": update.message.date.strftime("%Y-%m-%d %H:%M:%S"),  # Дата в формате строки
         "chat_id": update.message.chat.id,  # ID чата
-        "user_id": update.message.from_user.id  # ID пользователя
+        "usertg_id": update.message.from_user.id  # ID пользователя
     }
     print(message_data)
     # Prepare the HTTP POST request
-    url = 'http://192.168.1.206:8000/bot/test/'
+    """ЗДЕСЬ Я ОТПРАВИЛ ВАШЕ СООБЩЕНИЕ В ТЕЛЕГРАММЕ"""
+    url = 'http://192.168.1.206:8000/bot/api/message/'
     async with ClientSession() as session:
         try:
             # Send the text to your custom endpoint as JSON
-            async with session.post(url, json={"message": message_data }) as response:
+            async with session.post(url, json=message_data) as response:
                 
                 if response.status == 200:
                     # Receive the response text (JSON expected)
@@ -51,12 +52,37 @@ TEXT_INPUT, HELP = range(2)
 
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    message = "Welcome! How can I assist you today?"
-    keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(message, reply_markup=reply_markup)
-    return TEXT_INPUT
+        # Получаем user_tg_id и chat_id из сообщения пользователя
+    user_tg_id = update.effective_user.id
+    chat_id = update.effective_chat.id
 
+    # Определяем приветственное сообщение
+    message = "Welcome! How can I assist you today?"
+
+    # Создаем клавиатуру с кнопкой для вызова менеджера
+    keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
+
+    # Создаем разметку для клавиатуры
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Отправляем сообщение пользователю с клавиатурой
+    await update.message.reply_text(message, reply_markup=reply_markup)
+
+    # Здесь можно добавить логику для отправки user_tg_id и chat_id на ваш API-эндпоинт
+    # Например, можно использовать библиотеку requests для отправки POST-запроса на ваш API
+    # 
+    api_url = "http://192.168.1.206:8000/bot/api/student/"
+    payload = {'usertg_id': user_tg_id} #, 'chat_id': chat_id
+    response = requests.post(api_url, json={'usertg_id': user_tg_id})
+    print({'usertg_id': user_tg_id})
+    # Проверяем успешность запроса и обрабатываем ответ
+    if response.status_code == 200:
+        print("User data sent successfully to the API.")
+    else:
+        print(f"Failed to send user data to the API.{response.status_code}")
+
+    # Возвращаем следующее состояние для обработчика диалога
+    return TEXT_INPUT
 # Function to handle the help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     help_text = "This is the help section. Ask me anything!"
