@@ -1,0 +1,16 @@
+version: '3'
+services:
+  rasa:
+    image: python:3.9.19
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command:
+      - /bin/bash
+      - -c
+      - |
+        pip install rasa &&
+        rasa train &&
+        rasa run --enable-api --cors "*" --port 5005
+    ports:
+      - "5005:5005"
