@@ -1,13 +1,13 @@
 .navbar {
   display: flex;
   justify-content: end;
+  height: var(--navbar-height);
   align-items: center;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
   padding: 10px 20px;
 }
-
-.avatar {
-  background-color: var(--bg-dark);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.list {
+  display: flex;
+  gap: 40px;
+  align-items: center;
 }

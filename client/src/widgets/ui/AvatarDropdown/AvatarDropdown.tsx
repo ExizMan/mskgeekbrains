@@ -1,9 +1,7 @@
-import { Avatar, Text } from '@shared/ui';
 import cls from './AvatarDropdown.module.scss';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '@shared/lib/hooks';
+import { Avatar, Text } from '@shared/ui';
+import {  useState } from 'react';
 import { classNames, ColorEnum, SizeEnum } from '@shared/lib';
-import { selectCurrentUser } from '@entities/user/lib/features';
 import { useLogout } from '@features/auth';
 import { useGetMe } from '@entities/user';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +21,7 @@ export const AvatarDropdown = () => {
                     setIsOpen(false);
                 }}
                 className={cls.wrapper}>
-                <Avatar src={data.avatar} />
+                <Avatar />
                 {isOpen &&
                     <ul className={cls.list}>
                         <li className={cls.item}>
