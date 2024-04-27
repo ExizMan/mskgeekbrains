@@ -35,13 +35,23 @@ class ChatViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
-        response["last_message"] = Message.objects.filter(chat_id=response.data[0]['id']).last()
 
+        #response.data["last_message"] = Message.objects.filter(chat_id=response.data["id"]).last()
+
+        return Response(response.data)
 
 
 class MessageViewSet(ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+    @action(detail=True, methods=['get'])
+    def get_by_chat(self, request, pk):
+
+        messages = Message.objects.filter(chat_id=pk).order_by('-date').values('id','text', 'date', 'answer_by')
+
+        return Response(messages, status=HTTP_200_OK)
+
 
 
 
