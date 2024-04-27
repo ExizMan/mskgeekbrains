@@ -20,10 +20,14 @@ class ChatSerializer(ModelSerializer):
         model = Chat
         fields = '__all__'
     def get_last_massage(self, obj):
-        return Message.objects.filter(chat_id=obj.id).last().text
+        if Message.objects.filter(chat_id=obj.id).exists():
+            return Message.objects.filter(chat_id=obj.id).last().text
+        return None
 
     def get_username(self, obj):
-        return Student.objects.get(usertg_id=obj.id).username
+        if Student.objects.filter(usertg_id=obj.id).exists():
+            return Student.objects.get(usertg_id=obj.id).firstname
+        return None
 
 
 class StudentSerializer(ModelSerializer):
