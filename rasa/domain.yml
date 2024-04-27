@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+  - document_after_education
   - greet
   - goodbye
   - affirm
@@ -10,8 +11,11 @@ intents:
   - bot_challenge
 
 responses:
+  utter_document_after_education:
+    - text: "После успешного прохождения выпускных испытаний вы получите документ, подтверждающий уровень ваших компетенций. Подробнее - https://gb.ru/academiccertificates"
+
   utter_greet:
-  - text: "Привет, как я могу тебе помочь??"
+  - text: "Привет, как я могу тебе помочь?"
 
   utter_cheer_up:
   - text: "Это должно тебе помочь:"
