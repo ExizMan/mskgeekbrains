@@ -1,0 +1,9 @@
+.form {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: var(--bg);
+  padding: 60px 40px;
+  border-radius: var(--border-radius-1);
+}
