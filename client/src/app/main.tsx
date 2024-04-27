@@ -7,6 +7,7 @@ import ThemeProvider from "@shared/lib/utils/providers/ThemeProvider/ui/ThemePro
 import {App} from "@app/App.tsx";
 import {Provider} from "react-redux";
 import 'react-toastify/dist/ReactToastify.css';
+import 'swiper/css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
         <ThemeProvider>

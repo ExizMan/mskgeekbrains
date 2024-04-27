@@ -11,6 +11,13 @@ export const Navbar = () => {
                     <Text.Link
                         size={SizeEnum.H3}
                         color={ColorEnum.BLACK}
+                        to="/statistics"
+                    >Статистика</Text.Link>
+                </li>
+                <li className={cls.listItem}>
+                    <Text.Link
+                        size={SizeEnum.H3}
+                        color={ColorEnum.BLACK}
                         to="/"
                     >Чаты</Text.Link>
                 </li>

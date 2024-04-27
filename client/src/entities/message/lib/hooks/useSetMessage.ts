@@ -5,6 +5,8 @@ export const useSetMessage = () => {
 
     const trigger = async (value: IMessageProps) => {
         if (value) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             await messageTrigger(value);
         }
     };

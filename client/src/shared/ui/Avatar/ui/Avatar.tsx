@@ -13,7 +13,7 @@ export const Avatar = () => {
                 ?
                 <img
                     className={cls.image}
-                    src={`${import.meta.env.VITE_SERVER_FILES}/user/${user.avatar}`} alt="avatar"
+                    src={`${import.meta.env.VITE_SERVER_FILES}/user/${data.avatar}`} alt="avatar"
                 />
                 :
                 <div className={cls.round}>

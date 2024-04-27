@@ -1,4 +1,5 @@
 import { mainApi } from '@shared/lib';
+import { IMessageProps } from '@entities/message';
 
 export const messageApi = mainApi.injectEndpoints({
     endpoints: (build) => ({
@@ -9,7 +10,7 @@ export const messageApi = mainApi.injectEndpoints({
             }),
             providesTags: ['Messages'],
         }),
-        setMessage: build.mutation<any, string>({
+        setMessage: build.mutation({
             query: (value: string) => ({
                 url: `/bot/api/message/`,
                 method: 'POST',

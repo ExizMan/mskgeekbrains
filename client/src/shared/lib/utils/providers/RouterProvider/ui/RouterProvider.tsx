@@ -1,6 +1,6 @@
 import cls from './RouterProvider.module.scss';
 import { createBrowserRouter, redirect } from 'react-router-dom';
-import { LoginPage, ChatsPage, MyPage, RegisterPage, ChatPage } from '@pages/ui';
+import { LoginPage, ChatsPage, MyPage, RegisterPage, ChatPage, ChartsPage } from '@pages/ui';
 import { ReactNode } from 'react';
 import { Navbar, Toolbar } from '@widgets/ui';
 
@@ -24,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <Provider><ChatPage /></Provider>,
+            },
+            {
+                path: 'statistics',
+                element: <><Navbar /><ChartsPage /></>,
             },
             {
                 path: 'user',
