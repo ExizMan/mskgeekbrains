@@ -2,6 +2,10 @@
 
 ## Deploy using Docker-Compose
 
+```bash
+docker-compose up -d
+```
+
 ## Deploy in local
 
 - Python 3.9.19
