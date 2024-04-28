@@ -21,7 +21,7 @@ export const ChatCard = (
             <div className={cls.avatar}></div>
             <div className={cls.info}>
                 <Text.Paragraph size={SizeEnum.H1}>
-                    {username.slice(0, 10)}...
+                    {username?.length > 15 ? `${username?.slice(0, 15)}...` : username?.slice(0, 15)}
                 </Text.Paragraph>
                 <Text.Paragraph
                     weight={WeightEnum.MEDIUM}

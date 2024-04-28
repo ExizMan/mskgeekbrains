@@ -1,13 +1,13 @@
 .wrapper {
   height: calc(100vh - var(--navbar-height));
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px 40px 100px;
 }
-.list {
-  height: 100%;
-  &Item {
-    padding: 20px 40px;
-    margin: 0 auto;
-  }
-}
-
-.char {
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
