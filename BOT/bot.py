@@ -9,6 +9,8 @@ persistence = PicklePersistence(filepath='my_bot_persistence',)
 import requests
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Extract text from the incoming Telegram message
+    await update.message.reply_text("Ожидайте...")
+
     text = update.message.text
     message_data = {
         "text": update.message.text,  # Текст сообщения
@@ -18,20 +20,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     }
     print(message_data)
     # Prepare the HTTP POST request
-    url = 'http://192.168.1.206:8000/bot/api/message/'
+    url = 'http://192.168.1.206:8000/bot/api/message/receive/'
 
     # Send "Loading..." message to the user
-    await update.message.reply_text("Loading...")
 
     async with ClientSession() as session:
         try:
             # Send the text to your custom endpoint as JSON
             async with session.post(url, json=message_data) as response:
-                if response.status == 200:
+                if response.status == 200 or response.status == 201:
                     # Receive the response text (JSON expected)
                     data = await response.json()
                     print(data)
-                    response_text = data.get("message", "No response from server")
+                    response_text = data.get('text', 'Вызываю менеджера, не понял что вы сказали')
                 else:
                     response_text = f"Failed to reach the server, status code: {response.status}"
         except Exception as e:
@@ -39,7 +40,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.error(f"HTTP request error: {e}")
 
     # Send the response back to the user
-    keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
+    keyboard = [
+    [
+        InlineKeyboardButton("1", callback_data='1'),
+        InlineKeyboardButton("2", callback_data='2'),
+        InlineKeyboardButton("3", callback_data='3'),
+        InlineKeyboardButton("4", callback_data='4'),
+        InlineKeyboardButton("5", callback_data='5')
+    ]
+]
+
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(response_text, reply_markup=reply_markup)
 
@@ -60,16 +70,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.effective_chat.id
 
     # Определяем приветственное сообщение
-    message = "Welcome! How can I assist you today?"
+    message = "Привет! Рад помочь тебе с учебными вопросами!"
 
     # Создаем клавиатуру с кнопкой для вызова менеджера
-    keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
+#     keyboard = [
+#     [
+#         InlineKeyboardButton("1", callback_data='1'),
+#         InlineKeyboardButton("2", callback_data='2'),
+#         InlineKeyboardButton("3", callback_data='3'),
+#         InlineKeyboardButton("4", callback_data='4'),
+#         InlineKeyboardButton("5", callback_data='5')
+#     ]
+# ]
 
-    # Создаем разметку для клавиатуры
-    reply_markup = InlineKeyboardMarkup(keyboard)
+#     # Создаем разметку для клавиатуры
+#     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Отправляем сообщение пользователю с клавиатурой
-    await update.message.reply_text(message, reply_markup=reply_markup)
+    await update.message.reply_text(message)#, reply_markup=reply_markup)
 
     # Здесь можно добавить логику для отправки user_tg_id и chat_id на ваш API-эндпоинт
     # Например, можно использовать библиотеку requests для отправки POST-запроса на ваш API
@@ -83,22 +101,42 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         print("User data sent successfully to the API.")
     else:
         print(f"Failed to send user data to the API.{response.status_code}")
-
+    response = requests.post("http://192.168.1.206:8000/bot/api/chat/", json={'id':chat_id,'usertg_id': user_tg_id,'observer_id' : 1})
+    print({'usertg_id': user_tg_id})
+    # Проверяем успешность запроса и обрабатываем ответ
+    if response.status_code == 200:
+        print("User data sent successfully to the http://192.168.1.206:8000/bot/api/chat/.")
+    else:
+        print(f"Failed to send user data to the API.{response.status_code}")
     # Возвращаем следующее состояние для обработчика диалога
     return TEXT_INPUT
 # Function to handle the help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     help_text = "This is the help section. Ask me anything!"
-    keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
+    keyboard = [
+    [
+        InlineKeyboardButton("1", callback_data='1'),
+        InlineKeyboardButton("2", callback_data='2'),
+        InlineKeyboardButton("3", callback_data='3'),
+        InlineKeyboardButton("4", callback_data='4'),
+        InlineKeyboardButton("5", callback_data='5')
+    ]
+    ]
+
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(help_text, reply_markup=reply_markup)
 
 # Function to handle button presses (callback queries)
 async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()  # Notify Telegram that the callback has been handled
-    if query.data == 'call_manager':
-        await query.edit_message_text(text="Help is on the way!")
+    await query.answer() 
+     # Notify Telegram that the callback has been handled
+    if query.data in {'1', '2'}:
+        await query.edit_message_text(text="Перевожу на куратора")
+    elif query.data in {'3', '4'}:
+        await query.edit_message_text(text="Что можно было бы улучшить?")
+    elif query.data in {'5'}:
+        await query.edit_message_text(text="Cпасибо за обратную связь!")
     else:
         await query.edit_message_text(text="Sorry, I didn't understand that command.")
 async def handle_group_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
