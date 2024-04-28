@@ -1,7 +1,14 @@
 import pandas as pd
+import requests
+from colorama import init, Fore, Back, Style
 
-def processingQuestion(text):
-    return text.upper()
+def processingQuestion(message):
+    m1 = "I: " + str(message)
+    print(Back.BLUE + m1)
+    response = requests.post('http://localhost:5005/webhooks/rest/webhook', json={'message': message})
+    result = "O: " + str(response.json()[0]["text"])
+    print(Back.GREEN + result)
+    return str(response.json()[0]["text"])
 
 # Если будут подписаны колонки
 
