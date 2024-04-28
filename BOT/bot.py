@@ -18,13 +18,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     }
     print(message_data)
     # Prepare the HTTP POST request
-    """ЗДЕСЬ Я ОТПРАВИЛ ВАШЕ СООБЩЕНИЕ В ТЕЛЕГРАММЕ"""
     url = 'http://192.168.1.206:8000/bot/api/message/'
+
+    # Send "Loading..." message to the user
+    await update.message.reply_text("Loading...")
+
     async with ClientSession() as session:
         try:
             # Send the text to your custom endpoint as JSON
             async with session.post(url, json=message_data) as response:
-                
                 if response.status == 200:
                     # Receive the response text (JSON expected)
                     data = await response.json()
@@ -40,6 +42,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton("Call Manager", callback_data='call_manager')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(response_text, reply_markup=reply_markup)
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
