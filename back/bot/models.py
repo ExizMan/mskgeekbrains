@@ -1,5 +1,7 @@
 import uuid
 
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -25,6 +27,7 @@ class Message(models.Model):
 
 
 class Chat(models.Model):
+    id = models.IntegerField(primary_key=True)
     usertg_id = models.ForeignKey('Student', on_delete=models.CASCADE)
     observer_id = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True)
 
@@ -38,6 +41,23 @@ class Review(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     observer = models.ForeignKey('users.User', on_delete=models.CASCADE)
     on_message = models.ForeignKey(Message, on_delete=models.CASCADE)
-    rate = models.IntegerField()
+    rate = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     description = models.TextField()
+
+class Statistics(models.Model):
+    observer = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    reviews = models.ManyToManyField(Review)
+    messages = models.ManyToManyField(Message)
+
+    def clean(self):
+        super().clean()
+
+        for review in self.reviews.all():
+            if review.observer != self.observer:
+                raise ValidationError("Observer of review must match Statistics observer.")
+
+        for message in self.messages.all():
+            if message.observer != self.observer:
+                raise ValidationError("Observer of message must match Statistics observer.")
+
 # Create your models here.

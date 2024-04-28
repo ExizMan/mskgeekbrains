@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register('student', StudentViewSet)
 router.register('chat', ChatViewSet)
 router.register('message', MessageViewSet)
+router.register('review', ReviewViewSet)
 
 
 
